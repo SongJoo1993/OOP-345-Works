@@ -1,0 +1,18 @@
+/*
+  Name: Song Joo
+  Seneca email: sjoo6@myseneca.ca
+  Student ID: 171 443 211
+  Date: Sept-18-2022
+*/
+
+The main difference is that an externally linked name, such as a variable or a function, is connected to the same name in different modules while an internally linked name is only connected across different scopes inside the module in which the name is defined. 
+In case of this week’s workshop, “g_taxrate” and “g_discount” are externally linked names declared in “carads” module but they are defined and modified in another file “w1_p2” and used in logics in “carads” module. 
+In contrast, “constexpr int MAX_CARS”is internally linked const global variable that is invisible outside “w1_p2” file.
+
+Static variable is a variable with internal linkage that isn’t accessible outside its own translation unit, but only visible to any scopes withing its translation unit. 
+Therefore, the storage duration of a static variable, the lifetime of the variable, lasts as long as the entire lifetime of the program. 
+In this week’s workshop, I have one static variable called “static int counter” that was used to count the number of times when “display” function is called since I have to use that information to display numbers of “new cars” in the program.
+
+As opposed to part one, “c_brand ” that was initially allocated static memory  was changed to a resource which has dynamically allocated memory. 
+Therefore, I had to implement the rule of three because I had to manage the resource in the class, “c_brand”. 
+In addition, I specifically used the copy constructor “Cars(const Cars&)” inside the extraction operator “void operator>>(const Cars& car1, Cars& car2)” where I had to manage to copy the resource of one Car class to another Car class.

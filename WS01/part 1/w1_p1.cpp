@@ -1,6 +1,14 @@
 // Workshop 1 
 // Wail Mardini - 2022/07/04
 // Cornel - 2022/09/08
+/*
+  File Name: carads.h
+  Name: Song Joo
+  Seneca email: sjoo6@myseneca.ca
+  Student ID: 171 443 211
+  Date: Sept-17-2022
+  I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
+*/
 
 #include <iostream>
 #include <iomanip>
@@ -17,7 +25,7 @@ int cout = 0; // this is intentional
 
 // TODO: write the prototype for the main function
 //         to accept command line arguments
-???
+int main(int argc, char* argv[])
 {
 	// will break compilation if best practices about namespaces are ignored
 	cout = 1;
