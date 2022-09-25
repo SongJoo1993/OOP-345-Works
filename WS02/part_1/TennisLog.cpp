@@ -1,69 +1,72 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include <fstream>
+#include <string.h>
 #include"TennisLog.h"
 
 
 namespace sdds {
 
 	// TennisMatch Member Functions
-	ostream& TennisMatch::operator<<(ostream& os)
+
+	ostream& operator<<(std::ostream& os, TennisMatch T)
 	{
-		if (t_tournament_id.empty()) 
+		if (T.t_tournament_id.empty())
 		{
-			std::cout << "Empty Match" << std::endl;
+			os << "Empty Match";
 		}
 		else
 		{
 			// TOURNEY ID
-			std::cout.width(20);
-			std::cout.fill('*');
-			std::cout << "Tourney ID";
-			std::cout << " : ";
-			std::cout.width(30);
-			std::cout.fill('*');
-			std::cout.setf(std::ios::left);
-			std::cout << t_tournament_id << std::endl;
+			os.width(20);
+			os.fill('.');
+			os << "Tourney ID";
+			os << " : ";
+			os.width(30);
+			os.fill('.');
+			os.setf(std::ios::left);
+			os << T.t_tournament_id << std::endl;
 			std::cout.unsetf(std::ios::left);
 			// MATCH ID
-			std::cout.width(20);
-			std::cout.fill('*');
-			std::cout << "Match ID";
-			std::cout << " : ";
-			std::cout.width(30);
-			std::cout.fill('*');
-			std::cout.setf(std::ios::left);
-			std::cout << t_match_id << std::endl;
-			std::cout.unsetf(std::ios::left);
+			os.width(20);
+			os.fill('.');
+			os << "Match ID";
+			os << " : ";
+			os.width(30);
+			os.fill('.');
+			os.setf(std::ios::left);
+			os << T.t_match_id << std::endl;
+			os.unsetf(std::ios::left);
 			// TOURNEY
-			std::cout.width(20);
-			std::cout.fill('*');
-			std::cout << "Tourney";
-			std::cout << " : ";
-			std::cout.width(30);
-			std::cout.fill('*');
-			std::cout.setf(std::ios::left);
-			std::cout << t_tournament_name << std::endl;
-			std::cout.unsetf(std::ios::left);
+			os.width(20);
+			os.fill('.');
+			os << "Tourney";
+			os << " : ";
+			os.width(30);
+			os.fill('.');
+			os.setf(std::ios::left);
+			os << T.t_tournament_name << std::endl;
+			os.unsetf(std::ios::left);
 			// WINNER
-			std::cout.width(20);
-			std::cout.fill('*');
-			std::cout << "Winner";
-			std::cout << " : "; 
-			std::cout.width(30);
-			std::cout.fill('*');
-			std::cout.setf(std::ios::left);
-			std::cout << t_winner << std::endl;
-			std::cout.unsetf(std::ios::left);
+			os.width(20);
+			os.fill('.');
+			os << "Winner";
+			os << " : ";
+			os.width(30);
+			os.fill('.');
+			os.setf(std::ios::left);
+			os << T.t_winner << std::endl;
+			os.unsetf(std::ios::left);
 			// LOSER
-			std::cout.width(20);
-			std::cout.fill('*');
-			std::cout << "Loser";
-			std::cout << " : ";
-			std::cout.width(30);
-			std::cout.fill('*');
-			std::cout.setf(std::ios::left);
-			std::cout << t_loser << std::endl;
-			std::cout.unsetf(std::ios::left);
+			os.width(20);
+			os.fill('.');
+			os << "Loser";
+			os << " : ";
+			os.width(30);
+			os.fill('.');
+			os.setf(std::ios::left);
+			os << T.t_loser << std::endl;
+			os.unsetf(std::ios::left);
 		}
 		return os;
 	}
@@ -75,15 +78,14 @@ namespace sdds {
 	{
 		std::ifstream ifs (fileName);
 		string temp{};
-		int i = 0;
-	
+		unsigned i = 0;
+
 		while (getline(ifs,temp)) {
 			if (ifs.good()) {
 				counter++;
 			}
 		}
 
-		
 		t_matches = new TennisMatch[--counter];
 		ifs.clear();
 		ifs.seekg(i);
@@ -98,27 +100,65 @@ namespace sdds {
 				ifs >> t_matches[i].t_match_id;
 				ifs.ignore();
 				getline(ifs, t_matches[i].t_winner, ',');
-				getline(ifs, t_matches[i++].t_loser);
+				getline(ifs, t_matches[i++].t_loser); 
 			}
 		}
-
-		std::cout << counter << std::endl;
 
 		ifs.close();
 	}
 	void TennisLog::addMatch(TennisMatch obj)
 	{
+		unsigned i{};
+		TennisMatch* temp = nullptr;
+		temp = new TennisMatch[counter+1];
+
+		for (i = 0; i < counter; i++) 
+		{
+			temp[i] = t_matches[i];
+		}
+		temp[counter++] = obj;
+		delete[] t_matches;
+		t_matches = temp;
 	}
-	TennisLog& TennisLog::findMatches(const char* playerName)
+
+
+	TennisLog TennisLog::findMatches(const char* playerName)
 	{
-		return *this;
+		TennisLog matches{};
+
+		for (unsigned i = 0; i < counter; i++)
+		{
+			if (t_matches[i].t_loser == playerName || t_matches[i].t_winner == playerName)
+			{
+				matches.addMatch(t_matches[i]);
+			}
+		}
+
+		return matches;
 	}
-	TennisLog& TennisLog::operator[](size_t)
+	TennisMatch TennisLog::operator[](size_t s)
 	{
-		return *this;
+		TennisMatch temp{};
+
+
+		if (t_matches != nullptr && !t_matches[s].t_tournament_id.empty()) {
+			temp.t_tournament_id = t_matches[s].t_tournament_id;
+			temp.t_tournament_name = t_matches[s].t_tournament_name;
+			temp.t_match_id = t_matches[s].t_match_id;
+			temp.t_winner = t_matches[s].t_winner;
+			temp.t_loser = t_matches[s].t_loser;
+		}
+
+		return temp;
+
 	}
+
 	TennisLog::operator size_t()
 	{
-		return 0;
+		return counter;
+	}
+	TennisLog::~TennisLog()
+	{
+		delete[] t_matches;
 	}
 }

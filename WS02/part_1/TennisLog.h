@@ -12,7 +12,6 @@ namespace sdds
 		unsigned t_match_id{};
 		string t_winner{};
 		string t_loser{};
-		ostream& operator<<(ostream& os);
 	};
 
 	class TennisLog {
@@ -22,11 +21,13 @@ namespace sdds
 		TennisLog() {};
 		TennisLog(const char* fileName);
 		void addMatch(struct TennisMatch obj);
-		TennisLog& findMatches(const char* playerName);
-		TennisLog& operator[](size_t);
+		TennisLog findMatches(const char* playerName);
+		TennisMatch operator[](size_t);
 		operator size_t();
-
+		~TennisLog();
 	};
+
+	ostream& operator<<(std::ostream& os, TennisMatch);
 }
 
 
