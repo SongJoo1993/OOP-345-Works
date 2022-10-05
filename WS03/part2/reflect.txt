@@ -1,0 +1,26 @@
+/*
+  Name: Song Joo
+  Seneca email: sjoo6@myseneca.ca
+  Student ID: 171 443 211
+  Date: Oct-02-2022
+*/
+
+1.
+I specialized a function template “push()” because the original function doesn’t have the logic to find the duplicate of two different double type values. 
+The array of template class “colFloats” are composed of double types with four decimal points that eventually makes each element to be distinct even though followings are basically duplicate: “3333.3303” and “ 3333.3333”. 
+If we round up these two numbers, they eventually become “3333.33”; therefore, they have to be considered as a duplicate. 
+However, the original “push()” function was able to distinguish them as duplicate therefore I specialize the function to consider decimal points and filter duplicates.
+
+2.
+In this week’s workshop, we have an array of class template with class member, a static data member, called “t_dummy”. 
+Since this variable is static variable which is accesible within its translation during the entire lifetime of the program, its value isn’t reset when the class to which the static variable belongs is out of scope after the destructor. 
+For this reason, we have to manage the content of the variable outside the class definition.
+
+3-1.
+I added default constructor, display member function, and “== ” operator overloading function in Dictionary class for the following reasons. 
+First, I added default constructor because the class already has a constructor with arguments. Second, I created display member function to print the class’s member variables “m_term” and “m_description”. 
+Lastly, I created “==” operator overloaded because it was necessary to “push()” function inside both Queue and UniqueQueue template class in order to distinguish whether each Dictionary class has the same value in their member variables.
+
+3-2.
+The reason why we didn’t split header file and implementation file for the template is because template is not included in source code by default, but it is rather compiled when it is instantiated. 
+In other words, the complier needs to have access to the implementation of each instance of class templates therefore its implementation codes should reside in the header file altogether.
