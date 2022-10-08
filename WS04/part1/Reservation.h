@@ -30,8 +30,10 @@ namespace sdds
 		std::string getCharArray(std::string res, char* &des);
 		std::string getString(std::string res, std::string &des);
 		std::string getInt(std::string res, int &des);
+		~Reservation();
 	};
 	std::string trim(std::string &res); // removing whitespace
+	std::ostream& printKitchen(std::ostream& ostr, int time);
 }
 
 #endif // !SDDS_RESERVATION_H

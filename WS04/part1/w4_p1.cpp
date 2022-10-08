@@ -47,7 +47,7 @@ int main(int argc, char** argv)
 			}
 		} while (file);
 
-		ppReservations = new sdds::Reservation*[cnt];
+		ppReservations = new sdds::Reservation * [cnt];
 		cnt = 0;
 
 		// read again from the file, but this time load and store data
