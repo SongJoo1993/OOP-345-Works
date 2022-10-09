@@ -1,5 +1,5 @@
 /*
-  File Name: carads.h
+  File Name: Reservation.cpp
   Name: Song Joo
   Seneca email: sjoo6@myseneca.ca
   Student ID: 171 443 211
