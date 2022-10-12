@@ -1,0 +1,19 @@
+/*
+  Name: Song Joo
+  Seneca email: sjoo6@myseneca.ca
+  Student ID: 171 443 211
+  Date: Oct-11-2022
+*/
+
+One difference between the composition and the aggregation is that I had to take care of creating and destroying the components of the composition at its own construction and destruction whereas I didn’t need to take care of it in the aggregation. 
+For instance of composition, “Restaurant” class, I first assigned a dynamic memory to a pointer to “Reservation” class and then I iterated as many times as the number of rows in the argument string “reservations” in order to copy every data of all reservation classes. 
+In contrast, I didn’t go through the same step in constructing an aggregation “ConfirmationSender” class; a default constructor was created for the class without any logic inside it. 
+In addition to this difference at the construction, the destructor was also different since I only had to delete the double pointer of “Reservation” class while I had to delete both every data of all reservation classes and the double pointer variable “r_reservations”.
+
+
+The main difference between move and copy functions in the composition and the aggregation was that I that I had to take care of creating and destroying the components in the composition whereas I didn’t have to do so in the aggregation. 
+For instance of the copy assignment operator in the composition “Restaurant” class, I first deleted the components of destination class and created and dynamically assigned the memory of the component as follows: “r_reservations = new Reservation * [src.noOfReserv];” and “for (int i = 0; i < src.noOfReserv; i++) {r_reservations[i] = new Reservation(*src.r_reservations[i]);}”. 
+In contrast, I only took care of creating and dynamically assigned the memory of the member variable “c_reservations” inside the copy constructor of aggregation class “ConfirmationSender”.
+
+I used the composition when I created “Restaurant module”, and it was evident in my code inside the constructor with the argument of an array of “Reservation” classes and size_t variable. 
+I also used the aggregation when I created “ConfirmationSender module”, and the absence of a constructor which creates the object “Reservation” classes demonstrates that it is an aggregation.

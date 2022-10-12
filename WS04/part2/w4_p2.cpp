@@ -139,7 +139,7 @@ int main(int argc, char** argv)
 
 		std::cout << "CS: Testing Operators\n";
 		std::cout << "==========================\n";
-		sender1 += *ppReservations[5];
+		sender1 += *ppReservations[5]; //a reference to Reservation
 		sender1 += *ppReservations[16];
 		sender1 += *ppReservations[2];
 		sender1 += *ppReservations[16];
@@ -147,8 +147,8 @@ int main(int argc, char** argv)
 		sender1 += *ppReservations[10];
 		sender1 += *ppReservations[9];
 		std::cout << sender1;
-		sender1 -= *ppReservations[16];
-		sender1 -= *ppReservations[9];
+		sender1 -= *ppReservations[16]; 
+		sender1 -= *ppReservations[9];  
 		sender1 -= *ppReservations[7];
 		std::cout << sender1;
 		std::cout << "==========================\n\n";

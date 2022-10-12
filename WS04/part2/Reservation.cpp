@@ -3,7 +3,7 @@
   Name: Song Joo
   Seneca email: sjoo6@myseneca.ca
   Student ID: 171 443 211
-  Date: Oct-09-2022
+  Date: Oct-11-2022
   I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
 
@@ -23,7 +23,7 @@ namespace sdds
 	Reservation::Reservation(const std::string& res)
 	{
 		std::string resStr;
-		resStr = getCharArray(res, r_id);
+		resStr = getString(res, r_id);
 		resStr = getString(resStr, r_name);
 		resStr = getString(resStr, r_email);
 		resStr = getInt(resStr, r_peopleNum);
@@ -53,27 +53,10 @@ namespace sdds
 		return ostr;
 	}
 
-
-	std::string Reservation::getCharArray(std::string res, char* &des)
-	{
-		std::string idTemp;
-		int colonPosition = res.find(':');
-		idTemp = res.substr(0, colonPosition);
-		trim(idTemp);
-		des = new char[idTemp.length() + 1];
-
-		for (unsigned i = 0; i < idTemp.length(); i++) des[i] = idTemp[i];
-		des[idTemp.length()] = '\0';
-
-		res.erase(0, colonPosition + 1);
-		trim(res);
-
-		return res;
-	}
 	std::string Reservation::getString(std::string res, std::string& des)
 	{
 		std::string idTemp;
-		int colonPosition = res.find(',');
+		int colonPosition = res.find(':') != -1 ? res.find(':') : res.find(',');
 		idTemp = res.substr(0, colonPosition);
 		trim(idTemp);
 		des = idTemp;
@@ -86,9 +69,7 @@ namespace sdds
 	std::string Reservation::getInt(std::string res, int& des)
 	{
 		std::string idTemp;
-		/*int colonPosition = res.find(',') == 1 ? 2 : res.find(',');*/
 		int colonPosition = res.find(',');
-		//colonPosition == -1 ? colonPosition = 1 : colonPosition == 1 ? colonPosition++ : colonPosition;
 		colonPosition == -1 ? colonPosition = 1 : colonPosition;
 		idTemp = res.substr(0, colonPosition == 1 ? colonPosition + 1 : colonPosition - 1);
 		des = stoi(idTemp);
@@ -97,11 +78,6 @@ namespace sdds
 		trim(res);
 
 		return res;
-	}
-
-	Reservation::~Reservation()
-	{
-		delete[] r_id;
 	}
 
 	std::string trim(std::string& res)
@@ -132,6 +108,5 @@ namespace sdds
 		}
 		return ostr;
 	}
-
 }
 
