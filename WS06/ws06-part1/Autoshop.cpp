@@ -11,9 +11,19 @@ namespace sdds{
 
     void sdds::Autoshop::display(std::ostream& out) const
     {
-        for (int i = 0; i < m_vehicles.size(); i++) {
-            m_vehicles[i]->display(out);
+        for (const auto& car : m_vehicles)
+        {
+            car->display(out);
         }
+
+ /*       for (unsigned i = 0; i < m_vehicles.size(); i++) {
+            m_vehicles[i]->display(out);
+        }*/
+    }
+    Autoshop::~Autoshop()
+    {
+        for (auto& v : m_vehicles)
+            delete v;
     }
 }
 

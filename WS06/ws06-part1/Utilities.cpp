@@ -6,21 +6,23 @@
 
 
 namespace sdds {
-    Vehicle* sdds::createInstance(std::istream& in)
+    Vehicle* createInstance(std::istream& in)
     {
         Vehicle* temp{};
+
         char tag{};
         if (in.good()) {
             in >> tag;
             in.ignore();
+            
+            if (tag == 'c' || tag == 'C') {
+                temp = new sdds::Car(in);
+            }
+            else if (tag == 'v' || tag == 'V') {
+                temp = new sdds::Van(in);
+            }
         }
 
-        if (tag == 'c' || tag == 'C') {
-            temp = new sdds::Car(in);
-        }
-        else if (tag == 'f' || tag == 'F') {
-            temp = new sdds::Van(in);
-        }
         return temp;
     }
 }
