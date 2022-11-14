@@ -1,0 +1,21 @@
+/*
+  Name: Song Joo
+  Seneca email: sjoo6@myseneca.ca
+  Student ID: 171 443 211
+  Date: Nov-13-2022
+*/
+
+for_each: I used this to print each criminal record and accumulate total cases and total resolved cases.
+sort: I used this to sort criminal records in the order based on the parameters such as province, crime, cases, and resolved.
+replace_if: I used this to replace an invalid criminal type, “[none]”, with an empty string.
+any_of: I used this to iterate through every element of criminal records, and find whether a specific type of crime exists in the record.
+copy: I used this to copy every element of a vector Crime to a list of Crime.
+remove_if: I used this to remove any elements of vector Crime that contain a specific province.
+
+The advantage of using STL algorithms is the convenience and the less amount of codes that we would have to write comparing to writing a loop manually.
+For example, copy algorithm that I used takes much less codes than the amount of codes I would have written for a manual iteration. 
+“std::copy(this->c_crimes.begin(), this->c_crimes.end(), temp.begin());” This codes would have “for (int i = 0; i < this.size(); i++) { temp[i] = this[i]; }”
+
+In order to prevent the client from inputting invalid field, I would have redesigned the function with the exception handling facilities such as throw expressions and try…catch.
+For example, I would first create a function that checks whether the input value is among “Province”, “Crime”, “Cases”,  and “Resolved”, and throw exception if the input value is not equal to any of them.
+This function will be called in the beginning of the sort function so that I can check any catch for the error message inside the sort function.
