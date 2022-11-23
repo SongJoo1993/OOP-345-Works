@@ -1,0 +1,33 @@
+/*
+  Name: Song Joo
+  Seneca email: sjoo6@myseneca.ca
+  Student ID: 171 443 211
+  Date: Nov-22-2022
+*/
+
+
+Since the smart pointer resides on the stack memory, the advantage of implementing smsart pointer syntax is that it automiatically delete resource, a dynamically allocated memory, when the resource is out of scope.
+For example of the below code in WritingRecord.cpp file, the use of unique_ptr enables the resource, "test", to live until the end of its current scope and get destroyed.
+"std::unique_ptr<EmployeeWage> test(new EmployeeWage(emp[i].name, sal[j].salary));"
+
+
+The difference between raw and smart pointers was apparent in both writeRaw() and writeSmart() functions. 
+The memory should have been managed manually in writeRaw() while it was automatically managed in writeSmart() function where smart pointers was used.
+For example, writeRaw() function had to deallocate memory after it was added to "activeEmp" as below:
+
+try
+{
+	newEmp->rangeValidator();
+	activeEmp += newEmp;
+	delete newEmp;
+	newEmp = nullptr;
+}
+
+However, writeSmart() didn't need to use delete to deallocate the memory as the smart pointer does its job instead as below:
+
+if(emp[i].id == sal[j].id)
+{
+	std::unique_ptr<EmployeeWage> test(new EmployeeWage(emp[i].name, sal[j].salary));
+	test->rangeValidator();
+	activeEmp += test;
+}
